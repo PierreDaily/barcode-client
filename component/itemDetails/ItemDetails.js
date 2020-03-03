@@ -18,10 +18,8 @@ export default ItemDetails = ({ route, navigation }) => {
   const [brand, setBrand] = useState(null);
   const [brandList, setBrandList] = useState([]);
   const [name, setName] = useState(null);
-  // const { barcode, type } = route.params;
 
   useEffect(() => {
-    // console.log("envir : ", envir);
     console.log("server address ", serverAddress);
     getBrandList()
       .then(({ data }) => {
@@ -54,11 +52,8 @@ export default ItemDetails = ({ route, navigation }) => {
 
       <Button
         title="Submit"
-        onPress={
-          () =>
-            // saveItem({ brand, barcode, name, type }).then(() =>
-            navigation.navigate("Item-photo", { ...route.params, brand, name })
-          //)
+        onPress={() =>
+          navigation.navigate("Item-photo", { ...route.params, brand, name })
         }
       />
     </View>
