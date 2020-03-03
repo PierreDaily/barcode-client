@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, StyleSheet, Button } from "react-native";
+import { Text, View, StyleSheet, Button, Vibration } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
-import useScreenFocus from "../hook/useScreenFocus";
+import { useIsFocused } from "@react-navigation/native";
 
 export default function BarCodeScan({ navigation }) {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
-  const screenFocus = useScreenFocus();
+  const isFocused = useIsFocused();
 
   useEffect(() => {
     (async () => {
@@ -21,6 +21,7 @@ export default function BarCodeScan({ navigation }) {
     const standardType = barcodeKeys
       .filter(key => BarCodeScanner.Constants.BarCodeType[key] === type)
       .shift();
+    Vibration.vibrate([0, 200, 0]);
     navigation.navigate("Item-details", { barcode: data, type: standardType });
   };
 
@@ -39,7 +40,7 @@ export default function BarCodeScan({ navigation }) {
         justifyContent: "flex-end"
       }}
     >
-      {screenFocus && (
+      {isFocused && (
         <BarCodeScanner
           barCodeTypes={[
             BarCodeScanner.Constants.BarCodeType.ean13,

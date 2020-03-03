@@ -1,15 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Text, View, TouchableOpacity } from "react-native";
 import { Camera } from "expo-camera";
+import { useIsFocused } from "@react-navigation/native";
 import axios from "axios";
 import Const from "../../const";
 const { serverAddress, serverPort } = Const;
-import useScreenFocus from "../hook/useScreenFocus";
 
 export default function CapturePhoto({ route, navigation }) {
   const [hasPermission, setHasPermission] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
-  const screenFocus = useScreenFocus();
+  isFocused = useIsFocused();
   const camera = useRef(null);
 
   const { barcode, type: barcodeType, brand, name } = route.params;
@@ -47,7 +47,7 @@ export default function CapturePhoto({ route, navigation }) {
   }
   return (
     <View style={{ flex: 1 }}>
-      {screenFocus && (
+      {isFocused && (
         <Camera style={{ flex: 1 }} type={type} ref={camera}>
           <View
             style={{
