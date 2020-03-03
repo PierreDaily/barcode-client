@@ -4,13 +4,16 @@ import { Camera } from "expo-camera";
 import axios from "axios";
 import Const from "../../const";
 const { serverAddress, serverPort } = Const;
+import useScreenFocus from "../hook/useScreenFocus";
 
 export default function CapturePhoto({ route, navigation }) {
   const [hasPermission, setHasPermission] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
+  const screenFocus = useScreenFocus(navigation);
   const camera = useRef(null);
 
   const { barcode, type: barcodeType, brand, name } = route.params;
+
   const savePhoto = imgUri => {
     let data = new FormData();
     data.append("image", {
@@ -44,33 +47,35 @@ export default function CapturePhoto({ route, navigation }) {
   }
   return (
     <View style={{ flex: 1 }}>
-      <Camera style={{ flex: 1 }} type={type} ref={camera}>
-        <View
-          style={{
-            flex: 1,
-            backgroundColor: "transparent",
-            flexDirection: "row"
-          }}
-        >
-          <TouchableOpacity
+      {screenFocus && (
+        <Camera style={{ flex: 1 }} type={type} ref={camera}>
+          <View
             style={{
-              flex: 0.1,
-              alignSelf: "flex-end",
-              alignItems: "center"
-            }}
-            onPress={() => {
-              camera.current
-                .takePictureAsync()
-                .then(result => savePhoto(result.uri));
+              flex: 1,
+              backgroundColor: "transparent",
+              flexDirection: "row"
             }}
           >
-            <Text style={{ fontSize: 18, marginBottom: 10, color: "white" }}>
-              {" "}
-              {" Take Photo"}
-            </Text>
-          </TouchableOpacity>
-        </View>
-      </Camera>
+            <TouchableOpacity
+              style={{
+                flex: 0.1,
+                alignSelf: "flex-end",
+                alignItems: "center"
+              }}
+              onPress={() => {
+                camera.current
+                  .takePictureAsync()
+                  .then(result => savePhoto(result.uri));
+              }}
+            >
+              <Text style={{ fontSize: 18, marginBottom: 10, color: "white" }}>
+                {" "}
+                {" Take Photo"}
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </Camera>
+      )}
     </View>
   );
 }
