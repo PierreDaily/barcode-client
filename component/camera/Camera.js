@@ -5,14 +5,44 @@ import { useIsFocused } from "@react-navigation/native";
 import axios from "axios";
 import Const from "../../const";
 const { serverAddress, serverPort } = Const;
+import logger from "../../logger";
+import { findOptimalPictureSize } from "./utils";
 
 export default function CapturePhoto({ route, navigation }) {
   const [hasPermission, setHasPermission] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
+  const [pictureSize, setPictureSize] = useState(null);
+  const [cameraRdy, setCameraStatus] = useState(false);
   isFocused = useIsFocused();
   const camera = useRef(null);
 
   const { barcode, type: barcodeType, brand, name } = route.params;
+
+  useEffect(() => {
+    if (hasPermission && cameraRdy) {
+      (async () => {
+        try {
+          const fetchSizes = await camera.current.getAvailablePictureSizesAsync(
+            "4:3"
+          );
+          setPictureSize(findOptimalPictureSize(fetchSizes));
+        } catch (err) {
+          logger(err);
+        }
+      })();
+    }
+  }, [cameraRdy, hasPermission]);
+
+  const takePhoto = async () => {
+    try {
+      const { uri } = await camera.current.takePictureAsync({
+        quality: 0.5
+      });
+      savePhoto(uri);
+    } catch (err) {
+      logger(err);
+    }
+  };
 
   const savePhoto = imgUri => {
     let data = new FormData();
@@ -29,7 +59,7 @@ export default function CapturePhoto({ route, navigation }) {
     return axios
       .post(`http://${serverAddress}:${serverPort}/item`, data)
       .then(() => navigation.navigate("Item-saved"))
-      .catch(err => console.log(err));
+      .catch(err => logger(err));
   };
 
   useEffect(() => {
@@ -48,12 +78,19 @@ export default function CapturePhoto({ route, navigation }) {
   return (
     <View style={{ flex: 1 }}>
       {isFocused && (
-        <Camera style={{ flex: 1 }} type={type} ref={camera}>
+        <Camera
+          style={{ flex: 1 }}
+          type={type}
+          ref={camera}
+          onCameraReady={() => setCameraStatus(true)}
+          pictureSize={pictureSize}
+        >
           <View
             style={{
               flex: 1,
               backgroundColor: "transparent",
-              flexDirection: "row"
+              flexDirection: "row",
+              justifyContent: "center"
             }}
           >
             <TouchableOpacity
@@ -62,11 +99,7 @@ export default function CapturePhoto({ route, navigation }) {
                 alignSelf: "flex-end",
                 alignItems: "center"
               }}
-              onPress={() => {
-                camera.current
-                  .takePictureAsync()
-                  .then(result => savePhoto(result.uri));
-              }}
+              onPress={takePhoto}
             >
               <Text style={{ fontSize: 18, marginBottom: 10, color: "white" }}>
                 {" "}
