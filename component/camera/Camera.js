@@ -2,9 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { Text, View, TouchableOpacity } from "react-native";
 import { Camera } from "expo-camera";
 import { useIsFocused } from "@react-navigation/native";
-import axios from "axios";
-import Const from "../../const";
-const { serverAddress, serverPort } = Const;
+import API from "../api/api";
 import logger from "../../logger";
 import { optimalPictureSize } from "./utils";
 
@@ -56,8 +54,9 @@ export default function CapturePhoto({ route, navigation }) {
     data.append("name", name);
     data.append("brand", brand);
 
-    return axios
-      .post(`http://${serverAddress}:${serverPort}/item`, data)
+    return API.post(`/item`, data, {
+      "content-type": `multipart/form-data`
+    })
       .then(() => navigation.navigate("Item-saved"))
       .catch(err => logger(err));
   };

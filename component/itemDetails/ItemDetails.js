@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import {
   Text,
   Button,
@@ -8,11 +7,9 @@ import {
   StyleSheet,
   Picker
 } from "react-native";
-import Const from "../../const";
+import API from "../api/api";
 
-const { serverAddress, serverPort } = Const;
-const getBrandList = () =>
-  axios.get(`http://${serverAddress}:${serverPort}/brand`);
+const getBrandList = () => API.get(`/brand`);
 
 export default ItemDetails = ({ route, navigation }) => {
   const [brand, setBrand] = useState(null);
@@ -20,7 +17,6 @@ export default ItemDetails = ({ route, navigation }) => {
   const [name, setName] = useState(null);
 
   useEffect(() => {
-    console.log("server address ", serverAddress);
     getBrandList()
       .then(({ data }) => {
         setBrandList(data);
