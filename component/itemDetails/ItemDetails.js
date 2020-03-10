@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { Formik } from "formik"
+import * as yup from 'yup';
 import {
   Text,
   Button,
@@ -11,10 +13,16 @@ import API from "../api/api";
 
 const getBrandList = () => API.get(`/brand`);
 
+const yupSchema = yup.object().shape({
+  brand: yup.string().required(),
+  name: yup
+    .string()
+    .required()
+});
+
 export default ItemDetails = ({ route, navigation }) => {
   const [brand, setBrand] = useState(null);
   const [brandList, setBrandList] = useState([]);
-  const [name, setName] = useState(null);
 
   useEffect(() => {
     getBrandList()
@@ -27,31 +35,44 @@ export default ItemDetails = ({ route, navigation }) => {
 
   return (
     <View>
-      <Text>{route.params.EAN}</Text>
-      <Text>Name</Text>
-      <TextInput
-        style={{ height: 40, borderColor: "gray", borderWidth: 1 }}
-        onChangeText={text => setName(text)}
-        value={name}
-      />
-      <Text>Brand</Text>
-      <Picker
-        selectedValue={brand}
-        style={{ height: 50, width: 200 }}
-        onValueChange={(itemValue, itemIndex) => setBrand(itemValue)}
+      <Text>Barcode: {route.params.barcode}</Text>
+      {brand && (<Formik
+        initialValues={{ name: '' }}
+        validateOnChange={false}
+        validationSchema={yupSchema}
+        onSubmit={(values) => navigation.navigate("Item-photo", { ...route.params, brand: values.brand, name: values.name })}
       >
-        {brandList.length > 0 &&
-          brandList.map(brand => (
-            <Picker.Item label={brand.name} key={brand.id} value={brand.id} />
-          ))}
-      </Picker>
+        {({ errors, handleSubmit, setFieldValue, values }) => <View>
+          <Text>Name</Text>
+          <TextInput
+            style={[{ height: 40, borderColor: "gray", borderWidth: 1 }, errors.name && styles.error]}
+            onChangeText={text => setFieldValue('name', text)}
+            value={values.name}
+          />
 
-      <Button
-        title="Submit"
-        onPress={() =>
-          navigation.navigate("Item-photo", { ...route.params, brand, name })
-        }
-      />
-    </View>
+          <Text>Brand</Text>
+          <Picker
+            selectedValue={values.brand}
+            style={[{ height: 50, width: 200 }, errors.brand && styles.error]}
+            onValueChange={(itemValue, itemIndex) => setFieldValue('brand', itemValue)}
+          >
+            {brandList.length > 0 &&
+              brandList.map(brand => (
+                <Picker.Item label={brand.name} key={brand.id} value={brand.id} />
+              ))}
+          </Picker>
+          <Button
+            title="Submit"
+            onPress={handleSubmit}
+          />
+        </View>}
+      </Formik>)}
+    </View >
   );
 };
+
+const styles = StyleSheet.create({
+  error: {
+    backgroundColor: "red"
+  },
+});
