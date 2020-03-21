@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import { Text, View, StyleSheet, Button, Vibration } from "react-native";
+import { Text, View, StyleSheet, Vibration } from "react-native";
+import { Button } from "react-native-paper";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import { useIsFocused } from "@react-navigation/native";
 
@@ -53,7 +54,9 @@ export default function BarCodeScan({ navigation }) {
       )}
 
       {scanned && (
-        <Button title={"Tap to Scan Again"} onPress={() => setScanned(false)} />
+        <Button mode="contained" onPress={() => setScanned(false)}>
+          Tap to Scan Again
+        </Button>
       )}
     </View>
   );
