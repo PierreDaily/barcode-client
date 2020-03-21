@@ -3,12 +3,11 @@ import { Formik } from "formik"
 import * as yup from 'yup';
 import {
   Text,
-  Button,
   View,
-  TextInput,
   StyleSheet,
   Picker
 } from "react-native";
+import { Button, TextInput } from 'react-native-paper';
 import API from "../api/api";
 
 const getBrandList = () => API.get(`/brand`);
@@ -43,9 +42,9 @@ export default ItemDetails = ({ route, navigation }) => {
         onSubmit={(values) => navigation.navigate("Item-photo", { ...route.params, brand: values.brand, name: values.name })}
       >
         {({ errors, handleSubmit, setFieldValue, values }) => <View>
-          <Text>Name</Text>
           <TextInput
-            style={[{ height: 40, borderColor: "gray", borderWidth: 1 }, errors.name && styles.error]}
+            error={errors.name}
+            label="Name"
             onChangeText={text => setFieldValue('name', text)}
             value={values.name}
           />
@@ -62,9 +61,9 @@ export default ItemDetails = ({ route, navigation }) => {
               ))}
           </Picker>
           <Button
-            title="Submit"
+            mode="contained"
             onPress={handleSubmit}
-          />
+          >Submit</Button>
         </View>}
       </Formik>)}
     </View >
@@ -73,6 +72,6 @@ export default ItemDetails = ({ route, navigation }) => {
 
 const styles = StyleSheet.create({
   error: {
-    backgroundColor: "red"
+    color: "red",
   },
 });
