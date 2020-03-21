@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import { Text, View, StyleSheet, Button, Vibration } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import { useIsFocused } from "@react-navigation/native";
@@ -57,3 +58,9 @@ export default function BarCodeScan({ navigation }) {
     </View>
   );
 }
+
+BarCodeScan.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired
+  })
+};

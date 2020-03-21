@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import PropTypes from "prop-types";
 import { Text, View, TouchableOpacity } from "react-native";
 import { Camera } from "expo-camera";
 import { useIsFocused } from "@react-navigation/native";
@@ -8,10 +9,10 @@ import { optimalPictureSize } from "./utils";
 
 export default function CapturePhoto({ route, navigation }) {
   const [hasPermission, setHasPermission] = useState(null);
-  const [type, setType] = useState(Camera.Constants.Type.back);
+  const type = Camera.Constants.Type.back;
   const [pictureSize, setPictureSize] = useState(null);
   const [cameraRdy, setCameraStatus] = useState(false);
-  isFocused = useIsFocused();
+  let isFocused = useIsFocused();
   const camera = useRef(null);
 
   const { barcode, type: barcodeType, brand, name } = route.params;
@@ -110,3 +111,10 @@ export default function CapturePhoto({ route, navigation }) {
     </View>
   );
 }
+
+CapturePhoto.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired
+  }),
+  route: PropTypes.shape({ params: PropTypes.object })
+};

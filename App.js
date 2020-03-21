@@ -6,8 +6,8 @@ import BarcodeScan from "./component/barcodeScan/BarcodeScan";
 import ItemDetails from "./component/itemDetails/ItemDetails";
 import ItemSaved from "./component/itemSaved/ItemSaved";
 import Camera from "./component/camera/Camera";
-import { AppRegistry } from 'react-native';
-import { Provider as PaperProvider } from 'react-native-paper';
+import { AppRegistry } from "react-native";
+import { Provider as PaperProvider } from "react-native-paper";
 
 const Stack = createStackNavigator();
 console.log(process.env);
@@ -26,6 +26,6 @@ function App() {
   );
 }
 
-AppRegistry.registerComponent('app', () => App);
+AppRegistry.registerComponent("app", () => App);
 
 export default App;
