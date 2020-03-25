@@ -5,6 +5,7 @@ import * as yup from "yup";
 import { Text, View, StyleSheet, Picker } from "react-native";
 import { Button, TextInput } from "react-native-paper";
 import API from "../api/api";
+import logger from "./../../logger";
 
 const getBrandList = () => API.get(`/brand`);
 
@@ -20,16 +21,19 @@ const ItemDetails = ({ route, navigation }) => {
   useEffect(() => {
     getBrandList()
       .then(({ data }) => {
-        setBrandList(data);
         setBrand(data[0].id);
+        setBrandList(data);
       })
-      .catch(err => alert(err));
+      .catch(err => {
+        logger("brand list can't be fetched");
+        alert(err);
+      });
   }, []);
 
   return (
     <View>
       <Text>Barcode: {route.params.barcode}</Text>
-      {brand && (
+      {brand ? (
         <Formik
           initialValues={{ name: "" }}
           validateOnChange={false}
@@ -41,6 +45,7 @@ const ItemDetails = ({ route, navigation }) => {
               name: values.name
             })
           }
+          testID="form"
         >
           {({ errors, handleSubmit, setFieldValue, values }) => (
             <View>
@@ -75,6 +80,8 @@ const ItemDetails = ({ route, navigation }) => {
             </View>
           )}
         </Formik>
+      ) : (
+        <Text testID="loading">Loading...</Text>
       )}
     </View>
   );
