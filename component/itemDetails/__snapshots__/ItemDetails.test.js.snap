@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View>
+  <Text>
+    Barcode: 
+    123456789
+  </Text>
+  <Text
+    testID="loading"
+  >
+    Loading...
+  </Text>
+</View>
+`;
