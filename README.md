@@ -14,3 +14,5 @@ The back-end is based on NodeJs, Express JS and SQLite.
 I use Adobe XD to build mockup/proptype the graphical interface.
 Right now i am the only developper working on this project so i didn't implement git-flow yet but a CI is running test on github everytime a pullrequest is made.
 
+Here is a link to the server repository: https://github.com/PierreDaily/barcode-server
+
