@@ -24,5 +24,5 @@ test("navigates to Home screen on button press", () => {
   expect(homeButton).toHaveLength(1);
 
   fireEvent.press(homeButton[0]);
-  expect(navigationMock.navigate).toHaveBeenCalledWith("Home");
+  expect(navigationMock.navigate).toHaveBeenCalledWith("Homes");
 });
