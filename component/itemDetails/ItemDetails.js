@@ -53,6 +53,7 @@ const ItemDetails = ({ route, navigation }) => {
                 error={errors.name}
                 label="Name"
                 onChangeText={text => setFieldValue("name", text)}
+                testID="textInput"
                 value={values.name}
               />
 
@@ -64,6 +65,7 @@ const ItemDetails = ({ route, navigation }) => {
                   errors.brand && styles.error
                 ]}
                 onValueChange={itemValue => setFieldValue("brand", itemValue)}
+                testID="picker"
               >
                 {brandList.length > 0 &&
                   brandList.map(brand => (
@@ -74,7 +76,7 @@ const ItemDetails = ({ route, navigation }) => {
                     />
                   ))}
               </Picker>
-              <Button mode="contained" onPress={handleSubmit}>
+              <Button mode="contained" onPress={handleSubmit} testID="submit">
                 Submit
               </Button>
             </View>

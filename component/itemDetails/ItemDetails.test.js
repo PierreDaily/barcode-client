@@ -1,6 +1,7 @@
 import React from "react";
 import {
   act,
+  cleanup,
   render,
   fireEvent,
   waitForElement,
@@ -11,22 +12,13 @@ import api from "../api/api";
 jest.mock("../api/api");
 import renderer from "react-test-renderer";
 
-let props;
+const props = {
+  navigation: { navigate: jest.fn() },
+  route: { params: { barcode: "123456789" } }
+};
 
-beforeEach(() => {
-  props = {
-    navigation: { navigate: jest.fn() },
-    route: { params: { barcode: "123456789" } }
-  };
-});
-
-test("renders correctly", () => {
-  const tree = renderer.create(<ItemDetails {...props} />).toJSON();
-  expect(tree).toMatchSnapshot();
-});
-
-test("useEffect API call works", async () => {
-  api.get.mockResolvedValue({
+const spy = jest.spyOn(api, "get").mockImplementation(() =>
+  Promise.resolve({
     data: [
       {
         id: 1,
@@ -37,11 +29,62 @@ test("useEffect API call works", async () => {
         name: "coca cola"
       }
     ]
-  });
+  })
+);
+
+afterEach(() => {
+  jest.clearAllMocks();
+  cleanup();
+});
+
+test("renders correctly", async () => {
+  const tree = renderer.create(<ItemDetails {...props} />).toJSON();
+  await act(async () => flushMicrotasksQueue());
+  expect(tree).toMatchSnapshot();
+  expect(spy).toHaveBeenCalledTimes(1);
+});
+
+test("renders the form after fetching brand list", async () => {
   const { getByTestId, getAllByTestId } = render(<ItemDetails {...props} />);
 
   expect(getAllByTestId("loading")).toHaveLength(1);
-  await act(async () => flushMicrotasksQueue());
+  await (async () => waitForElement(() => getByTestId("form")));
   expect(getByTestId("form")).toBeTruthy();
-  expect(api.get).toHaveBeenCalledWith("/brand");
+  expect(spy).toHaveBeenCalledWith("/brand");
+  expect(spy).toHaveBeenCalledTimes(1);
+});
+
+test("Submit the form", async () => {
+  const { debug, getByTestId, getAllByTestId, getByText } = render(
+    <ItemDetails {...props} />
+  );
+
+  const {
+    route: {
+      params: { barcode }
+    }
+  } = props;
+  const brand = 2;
+  const name = "Random item";
+  const nextScreen = "Item-photo";
+
+  expect(getAllByTestId("loading")).toHaveLength(1);
+  await (async () => waitForElement(() => getByTestId("form")));
+  expect(getByTestId("form")).toBeTruthy();
+  expect(spy).toHaveBeenCalledWith("/brand");
+  expect(spy).toHaveBeenCalledTimes(1);
+
+  await act(async () =>
+    fireEvent(getByTestId("picker"), "onValueChange", brand)
+  );
+
+  fireEvent.changeText(getByTestId("textInput"), name);
+  await act(async () => fireEvent(getByTestId("submit"), "onPress"));
+  await act(async () => flushMicrotasksQueue());
+
+  expect(props.navigation.navigate).toHaveBeenCalledWith(nextScreen, {
+    barcode,
+    brand,
+    name
+  });
 });
