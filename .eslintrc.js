@@ -6,6 +6,7 @@ module.exports = {
   },
   extends: [
     "eslint:recommended",
+    "plugin:jest/recommended",
     "plugin:react/recommended",
     "plugin:prettier/recommended"
   ],
@@ -20,6 +21,6 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: "module"
   },
-  plugins: ["react", "prettier"],
+  plugins: ["jest", "react", "prettier"],
   rules: {}
 };

@@ -55,9 +55,7 @@ test("renders the form after fetching brand list", async () => {
 });
 
 test("Submit the form", async () => {
-  const { debug, getByTestId, getAllByTestId, getByText } = render(
-    <ItemDetails {...props} />
-  );
+  const { getByTestId, getAllByTestId } = render(<ItemDetails {...props} />);
 
   const {
     route: {
