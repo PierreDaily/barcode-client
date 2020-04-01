@@ -18,7 +18,7 @@ const API = {
   post: (path, params, headers) => {
     const options = {
       headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
+        "Content-Type": "application/json",
         ...headers
       },
       method: "POST",
@@ -31,7 +31,7 @@ const API = {
   put: (path, params, headers) => {
     const options = {
       headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
+        "Content-Type": "application/json",
         ...headers
       },
       method: "PUT",
