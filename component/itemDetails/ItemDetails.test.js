@@ -4,85 +4,82 @@ import {
   cleanup,
   render,
   fireEvent,
-  waitForElement,
-  flushMicrotasksQueue
+  flushMicrotasksQueue,
 } from "react-native-testing-library";
 import ItemDetails from "./ItemDetails";
-import api from "../api/api";
-jest.mock("../api/api");
 import renderer from "react-test-renderer";
 
-const props = {
-  navigation: { navigate: jest.fn() },
-  route: { params: { barcode: "123456789" } }
-};
+let minProps;
 
-const spy = jest.spyOn(api, "get").mockImplementation(() =>
-  Promise.resolve({
-    data: [
-      {
-        id: 1,
-        name: "nestle"
-      },
-      {
-        id: 2,
-        name: "coca cola"
-      }
-    ]
-  })
-);
+beforeEach(() => {
+  minProps = {
+    navigation: { navigate: jest.fn() },
+    route: { params: { barcode: "123456789", type: "EAN" } },
+  };
+});
 
 afterEach(() => {
-  jest.clearAllMocks();
   cleanup();
 });
 
 test("renders correctly", async () => {
-  const tree = renderer.create(<ItemDetails {...props} />).toJSON();
-  await act(async () => flushMicrotasksQueue());
+  const tree = renderer.create(<ItemDetails {...minProps} />).toJSON();
   expect(tree).toMatchSnapshot();
-  expect(spy).toHaveBeenCalledTimes(1);
 });
 
-test("renders the form after fetching brand list", async () => {
-  const { getByTestId, getAllByTestId } = render(<ItemDetails {...props} />);
-
-  expect(getAllByTestId("loading")).toHaveLength(1);
-  await (async () => waitForElement(() => getByTestId("form")));
-  expect(getByTestId("form")).toBeTruthy();
-  expect(spy).toHaveBeenCalledWith("/brand");
-  expect(spy).toHaveBeenCalledTimes(1);
-});
-
-test("Submit the form", async () => {
-  const { getByTestId, getAllByTestId } = render(<ItemDetails {...props} />);
+test("should submit the form with the correct informations", async () => {
+  const itemName = "random item";
+  const props = {
+    ...minProps,
+    route: {
+      params: { ...minProps.route.params, brandName: "Brand Name", brandId: 4 },
+    },
+  };
+  const { getByTestId } = render(<ItemDetails {...props} />);
 
   const {
     route: {
-      params: { barcode }
-    }
+      params: { barcode, brandId, type },
+    },
   } = props;
-  const brand = 2;
-  const name = "Random item";
   const nextScreen = "Item-photo";
 
-  expect(getAllByTestId("loading")).toHaveLength(1);
-  await (async () => waitForElement(() => getByTestId("form")));
   expect(getByTestId("form")).toBeTruthy();
-  expect(spy).toHaveBeenCalledWith("/brand");
-  expect(spy).toHaveBeenCalledTimes(1);
 
-  await act(async () =>
-    fireEvent(getByTestId("picker"), "onValueChange", brand)
-  );
-
-  fireEvent.changeText(getByTestId("textInput"), name);
+  fireEvent.changeText(getByTestId("textInput"), itemName);
   await act(async () => fireEvent(getByTestId("submit"), "onPress"));
-  await act(async () => flushMicrotasksQueue());
 
   expect(props.navigation.navigate).toHaveBeenCalledWith(nextScreen, {
     barcode,
-    brand,
-    name
+    brand: brandId,
+    name: itemName,
+    type,
   });
+});
+
+test("shouldn't submit the form because informations are missing", async () => {
+  const itemName = "random item";
+  const { getByTestId } = render(<ItemDetails {...minProps} />);
+
+  expect(getByTestId("form")).toBeTruthy();
+
+  fireEvent.changeText(getByTestId("textInput"), itemName);
+  await act(async () => fireEvent(getByTestId("submit"), "onPress"));
+  await act(async () => flushMicrotasksQueue());
+
+  expect(minProps.navigation.navigate).not.toHaveBeenCalledWith();
+});
+
+test("should navigate to 'Search' screen", async () => {
+  const expectedRoute = "Search";
+  const expectedValue = { barcode: "123456789", type: "EAN" };
+
+  const { getByTestId } = render(<ItemDetails {...minProps} />);
+
+  await act(async () => fireEvent(getByTestId("search"), "onPress"));
+
+  expect(minProps.navigation.navigate).toHaveBeenCalledWith(
+    expectedRoute,
+    expectedValue
+  );
 });
