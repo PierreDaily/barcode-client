@@ -4,7 +4,7 @@ import {
   cleanup,
   render,
   fireEvent,
-  flushMicrotasksQueue,
+  flushMicrotasksQueue
 } from "react-native-testing-library";
 import ItemDetails from "./ItemDetails";
 import renderer from "react-test-renderer";
@@ -14,7 +14,7 @@ let minProps;
 beforeEach(() => {
   minProps = {
     navigation: { navigate: jest.fn() },
-    route: { params: { barcode: "123456789", type: "EAN" } },
+    route: { params: { barcode: "123456789", type: "EAN" } }
   };
 });
 
@@ -32,15 +32,15 @@ test("should submit the form with the correct informations", async () => {
   const props = {
     ...minProps,
     route: {
-      params: { ...minProps.route.params, brandName: "Brand Name", brandId: 4 },
-    },
+      params: { ...minProps.route.params, brandName: "Brand Name", brandId: 4 }
+    }
   };
   const { getByTestId } = render(<ItemDetails {...props} />);
 
   const {
     route: {
-      params: { barcode, brandId, type },
-    },
+      params: { barcode, brandId, type }
+    }
   } = props;
   const nextScreen = "Item-photo";
 
@@ -53,7 +53,7 @@ test("should submit the form with the correct informations", async () => {
     barcode,
     brand: brandId,
     name: itemName,
-    type,
+    type
   });
 });
 

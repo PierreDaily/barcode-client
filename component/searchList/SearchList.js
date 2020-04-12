@@ -9,11 +9,11 @@ import getErrMsg from "./helpers";
 const SearchList = ({ navigation, route }) => {
   const [brandName, setBrandName] = useState("");
   const [brandList, setBrandList] = useState([]);
-  const navigateToItemDetails = (item) => {
+  const navigateToItemDetails = item => {
     navigation.navigate("Item-details", {
       ...route.params,
       brandId: item.id,
-      brandName: item.name,
+      brandName: item.name
     });
   };
 
@@ -21,15 +21,15 @@ const SearchList = ({ navigation, route }) => {
     <SafeAreaView>
       <Searchbar
         placeholder="Search"
-        onChangeText={(value) => {
+        onChangeText={value => {
           setBrandName(value);
           API.searchBrand(value)
-            .then((result) => {
+            .then(result => {
               if (result) {
                 setBrandList(result);
               }
             })
-            .catch((err) => logger(err));
+            .catch(err => logger(err));
         }}
         value={brandName}
         testID="search-bar"
@@ -38,8 +38,8 @@ const SearchList = ({ navigation, route }) => {
         <TouchableOpacity
           onPress={() =>
             API.postBrand(brandName)
-              .then((item) => navigateToItemDetails(item))
-              .catch((err) => {
+              .then(item => navigateToItemDetails(item))
+              .catch(err => {
                 logger(getErrMsg(err));
                 alert(getErrMsg(err));
               })
@@ -56,7 +56,7 @@ const SearchList = ({ navigation, route }) => {
             <List.Item title={item.name} />
           </TouchableOpacity>
         )}
-        keyExtractor={(item) => item.id.toString()}
+        keyExtractor={item => item.id.toString()}
       />
     </SafeAreaView>
   );
@@ -64,9 +64,9 @@ const SearchList = ({ navigation, route }) => {
 
 SearchList.propTypes = {
   navigation: PropTypes.shape({
-    navigate: PropTypes.func.isRequired,
+    navigate: PropTypes.func.isRequired
   }),
-  route: PropTypes.shape({ params: PropTypes.object }),
+  route: PropTypes.shape({ params: PropTypes.object })
 };
 
 export default SearchList;

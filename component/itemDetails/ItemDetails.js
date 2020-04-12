@@ -2,18 +2,18 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Formik } from "formik";
 import * as yup from "yup";
-import { Text, View, StyleSheet } from "react-native";
+import { Text, View } from "react-native";
 import { Button, TextInput } from "react-native-paper";
 
 const yupSchema = yup.object().shape({
   brandId: yup.number().required(),
   brandName: yup.string().required(),
-  name: yup.string().required(),
+  name: yup.string().required()
 });
 
 const ItemDetails = ({ route, navigation }) => {
   const {
-    params: { brandId, brandName, barcode, type },
+    params: { brandId, brandName, barcode, type }
   } = route;
 
   return (
@@ -22,16 +22,16 @@ const ItemDetails = ({ route, navigation }) => {
       {
         <Formik
           initialValues={{
-            name: "",
+            name: ""
           }}
           validateOnChange={false}
-          validate={async (values) => {
+          validate={async values => {
             const errors = {};
             try {
               await yupSchema.validate({
                 brandId,
                 brandName,
-                name: values.name,
+                name: values.name
               });
             } catch (err) {
               errors[err.path] = err.message;
@@ -39,12 +39,12 @@ const ItemDetails = ({ route, navigation }) => {
 
             return errors;
           }}
-          onSubmit={(values) =>
+          onSubmit={values =>
             navigation.navigate("Item-photo", {
               barcode,
               brand: brandId,
               name: values.name,
-              type,
+              type
             })
           }
           testID="form"
@@ -55,7 +55,7 @@ const ItemDetails = ({ route, navigation }) => {
                 <TextInput
                   error={errors.name}
                   label="Name"
-                  onChangeText={(text) => setFieldValue("name", text)}
+                  onChangeText={text => setFieldValue("name", text)}
                   testID="textInput"
                   value={values.name}
                 />
@@ -72,7 +72,7 @@ const ItemDetails = ({ route, navigation }) => {
                   onPress={() =>
                     navigation.navigate("Search", {
                       barcode,
-                      type,
+                      type
                     })
                   }
                   testID="search"
@@ -91,17 +91,11 @@ const ItemDetails = ({ route, navigation }) => {
   );
 };
 
-const styles = StyleSheet.create({
-  error: {
-    color: "red",
-  },
-});
-
 ItemDetails.propTypes = {
   navigation: PropTypes.shape({
-    navigate: PropTypes.func.isRequired,
+    navigate: PropTypes.func.isRequired
   }),
-  route: PropTypes.shape({ params: PropTypes.object }),
+  route: PropTypes.shape({ params: PropTypes.object })
 };
 
 export default ItemDetails;

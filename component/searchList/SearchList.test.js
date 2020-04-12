@@ -7,7 +7,7 @@ import {
   render,
   fireEvent,
   waitForElement,
-  flushMicrotasksQueue,
+  flushMicrotasksQueue
 } from "react-native-testing-library";
 import renderer from "react-test-renderer";
 import api from "./api";
@@ -18,26 +18,26 @@ const spy = jest.spyOn(api, "searchBrand").mockImplementation(() =>
   Promise.resolve([
     {
       id: 1,
-      name: "nestle",
+      name: "nestle"
     },
     {
       id: 2,
-      name: "coca cola",
-    },
+      name: "coca cola"
+    }
   ])
 );
 
 const spyPost = jest.spyOn(api, "postBrand").mockImplementation(() =>
   Promise.resolve({
     id: 3,
-    name: "new brand",
+    name: "new brand"
   })
 );
 
 beforeEach(() => {
   minProps = {
     navigation: { navigate: jest.fn() },
-    route: { params: { barcode: "123456789", type: "EAN" } },
+    route: { params: { barcode: "123456789", type: "EAN" } }
   };
 });
 
@@ -68,7 +68,7 @@ test("navigate to Item-details screen with correct props on click", async () => 
     barcode: "123456789",
     brandId: 1,
     brandName: "nestle",
-    type: "EAN",
+    type: "EAN"
   };
   const { getByTestId, getByText } = render(<SearchList {...minProps} />);
   const searchBar = getByTestId("search-bar");
@@ -105,7 +105,7 @@ test("navigate to Item-details with the right paramater if click on new brand", 
     barcode: "123456789",
     brandId: 3,
     brandName: "new brand",
-    type: "EAN",
+    type: "EAN"
   };
   const query = "abcd";
 
