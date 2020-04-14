@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import { Camera } from "expo-camera";
 import { useIsFocused } from "@react-navigation/native";
-import API from "../api/api";
+import API from "./api";
 import logger from "../../logger";
 import { optimalPictureSize } from "./utils";
 import Spinner from "react-native-loading-spinner-overlay";
@@ -39,36 +39,15 @@ export default function CapturePhoto({ route, navigation }) {
       const { uri } = await camera.current.takePictureAsync({
         quality: 0.5
       });
-      savePhoto(uri);
+
+      await API.postItem({ barcode, barcodeType, brand, name, imgUri: uri });
+
+      setIsLoading(false);
+      navigation.navigate("Item-saved");
     } catch (err) {
+      setIsLoading(false);
       logger(err);
     }
-  };
-
-  const savePhoto = imgUri => {
-    let data = new FormData();
-    data.append("image", {
-      uri: imgUri,
-      name: "image.jpg",
-      type: "image/jpeg"
-    });
-    data.append("barcode", barcode);
-    data.append("barcode_type", barcodeType);
-    data.append("name", name);
-    data.append("brand", brand);
-    setIsLoading(true);
-
-    return API.post(`/item`, data, {
-      "content-type": `multipart/form-data`
-    })
-      .then(() => {
-        setIsLoading(false);
-        navigation.navigate("Item-saved");
-      })
-      .catch(err => {
-        setIsLoading(false);
-        logger(err);
-      });
   };
 
   useEffect(() => {
