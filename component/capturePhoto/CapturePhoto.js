@@ -1,17 +1,19 @@
 import React, { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
-import { Text, View, TouchableOpacity } from "react-native";
+import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import { Camera } from "expo-camera";
 import { useIsFocused } from "@react-navigation/native";
 import API from "../api/api";
 import logger from "../../logger";
 import { optimalPictureSize } from "./utils";
+import Spinner from "react-native-loading-spinner-overlay";
 
 export default function CapturePhoto({ route, navigation }) {
   const [hasPermission, setHasPermission] = useState(null);
   const type = Camera.Constants.Type.back;
   const [pictureSize, setPictureSize] = useState(null);
   const [cameraRdy, setCameraStatus] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   let isFocused = useIsFocused();
   const camera = useRef(null);
 
@@ -54,12 +56,19 @@ export default function CapturePhoto({ route, navigation }) {
     data.append("barcode_type", barcodeType);
     data.append("name", name);
     data.append("brand", brand);
+    setIsLoading(true);
 
     return API.post(`/item`, data, {
       "content-type": `multipart/form-data`
     })
-      .then(() => navigation.navigate("Item-saved"))
-      .catch(err => logger(err));
+      .then(() => {
+        setIsLoading(false);
+        navigation.navigate("Item-saved");
+      })
+      .catch(err => {
+        setIsLoading(false);
+        logger(err);
+      });
   };
 
   useEffect(() => {
@@ -76,10 +85,11 @@ export default function CapturePhoto({ route, navigation }) {
     return <Text>No access to camera</Text>;
   }
   return (
-    <View style={{ flex: 1 }}>
+    <View style={styles.main}>
+      <Spinner visible={isLoading} textContent={"Loading..."} />
       {isFocused && (
         <Camera
-          style={{ flex: 4 }}
+          style={styles.camera}
           type={type}
           ref={camera}
           onCameraReady={() => setCameraStatus(true)}
@@ -94,23 +104,32 @@ export default function CapturePhoto({ route, navigation }) {
           justifyContent: "center"
         }}
       >
-        <TouchableOpacity
-          style={{
-            flex: 0.5,
-            alignSelf: "flex-end",
-            alignItems: "center"
-          }}
-          onPress={takePhoto}
-        >
-          <Text style={{ fontSize: 18, marginBottom: 10, color: "black" }}>
-            {" "}
-            {" Take Photo"}
-          </Text>
+        <TouchableOpacity style={styles.cameraButton} onPress={takePhoto}>
+          <Text style={styles.cameraButton__text}> {" Take Photo"}</Text>
         </TouchableOpacity>
       </View>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  camera: {
+    flex: 4
+  },
+  cameraButton: {
+    flex: 0.5,
+    alignSelf: "flex-end",
+    alignItems: "center"
+  },
+  cameraButton__text: {
+    fontSize: 18,
+    marginBottom: 10,
+    color: "black"
+  },
+  main: {
+    flex: 1
+  }
+});
 
 CapturePhoto.propTypes = {
   navigation: PropTypes.shape({
