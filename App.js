@@ -2,16 +2,16 @@ import React from "react";
 import "react-native-gesture-handler";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import BarcodeScan from "./component/barcodeScan/BarcodeScan";
-import ItemDetails from "./component/itemDetails/ItemDetails";
-import ItemSaved from "./component/itemSaved/ItemSaved";
-import CapturePhoto from "./component/capturePhoto/CapturePhoto";
-import SearchList from "./component/searchList/SearchList";
+import BarcodeScan from "./features/barcode-scan/BarcodeScan";
+import ItemDetails from "./features/item-details/ItemDetails";
+import ItemSaved from "./features/item-saved/ItemSaved";
+import CapturePhoto from "./features/capture-photo/CapturePhoto";
+import { SearchList } from "./features/search-brand";
 import { AppRegistry } from "react-native";
 import { Provider as PaperProvider } from "react-native-paper";
 
 const Stack = createStackNavigator();
-console.log(process.env);
+
 function App() {
   return (
     <PaperProvider>

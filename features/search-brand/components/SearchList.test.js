@@ -10,7 +10,7 @@ import {
   flushMicrotasksQueue
 } from "react-native-testing-library";
 import renderer from "react-test-renderer";
-import api from "./api";
+import api from "../api";
 jest.mock("./api");
 
 let minProps;
