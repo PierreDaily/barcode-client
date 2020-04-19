@@ -3,6 +3,11 @@
 exports[`renders correctly 1`] = `
 <RCTSafeAreaView
   emulateUnlessSupported={true}
+  style={
+    Object {
+      "padding": "4%",
+    }
+  }
 >
   <View
     style={
@@ -163,6 +168,7 @@ exports[`renders correctly 1`] = `
     </View>
   </View>
   <RCTScrollView
+    ItemSeparatorComponent={[Function]}
     data={Array []}
     disableVirtualization={false}
     getItem={[Function]}
