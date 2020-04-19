@@ -5,7 +5,7 @@ import { Button } from "react-native-paper";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import { useIsFocused } from "@react-navigation/native";
 
-export default function BarCodeScan({ navigation }) {
+const BarcodeScan = ({ navigation }) => {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
   const isFocused = useIsFocused();
@@ -60,10 +60,12 @@ export default function BarCodeScan({ navigation }) {
       )}
     </View>
   );
-}
+};
 
-BarCodeScan.propTypes = {
+BarcodeScan.propTypes = {
   navigation: PropTypes.shape({
     navigate: PropTypes.func.isRequired
   })
 };
+
+export { BarcodeScan };

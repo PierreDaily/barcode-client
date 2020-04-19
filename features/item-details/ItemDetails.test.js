@@ -6,7 +6,7 @@ import {
   fireEvent,
   flushMicrotasksQueue
 } from "react-native-testing-library";
-import ItemDetails from "./ItemDetails";
+import { ItemDetails } from "./ItemDetails";
 import renderer from "react-test-renderer";
 
 let minProps;

@@ -1,6 +1,6 @@
 import React from "react";
 import { render, fireEvent } from "react-native-testing-library";
-import ItemSaved from "./ItemSaved";
+import { ItemSaved } from "./ItemSaved";
 
 import renderer from "react-test-renderer";
 

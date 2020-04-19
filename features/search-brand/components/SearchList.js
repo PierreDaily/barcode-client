@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { FlatList, SafeAreaView, TouchableOpacity, View } from "react-native";
 import { List, Searchbar } from "react-native-paper";
-import styles from "./styles";
-import API from "./api";
-import logger from "../../logger";
-import getErrMsg from "./helpers";
+import styles from "../styles";
+import API from "../api";
+import logger from "../../../logger";
+import getErrMsg from "../helpers";
 
 const FlatListItemSeparator = () => {
   return (
@@ -80,4 +80,4 @@ SearchList.propTypes = {
   route: PropTypes.shape({ params: PropTypes.object })
 };
 
-export default SearchList;
+export { SearchList };
