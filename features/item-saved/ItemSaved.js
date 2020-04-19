@@ -18,4 +18,4 @@ ItemSaved.propTypes = {
   })
 };
 
-export default ItemSaved;
+export { ItemSaved };

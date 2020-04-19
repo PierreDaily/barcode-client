@@ -98,4 +98,4 @@ ItemDetails.propTypes = {
   route: PropTypes.shape({ params: PropTypes.object })
 };
 
-export default ItemDetails;
+export { ItemDetails };

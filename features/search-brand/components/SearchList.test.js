@@ -1,5 +1,5 @@
 import React from "react";
-import SearchList from "./SearchList";
+import { SearchList } from "./SearchList";
 
 import {
   act,
@@ -11,7 +11,7 @@ import {
 } from "react-native-testing-library";
 import renderer from "react-test-renderer";
 import api from "../api";
-jest.mock("./api");
+jest.mock("../api");
 
 let minProps;
 const spy = jest.spyOn(api, "searchBrand").mockImplementation(() =>

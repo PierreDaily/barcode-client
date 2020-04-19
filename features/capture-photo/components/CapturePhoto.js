@@ -3,12 +3,12 @@ import PropTypes from "prop-types";
 import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import { Camera } from "expo-camera";
 import { useIsFocused } from "@react-navigation/native";
-import API from "./api";
-import logger from "../../logger";
-import { optimalPictureSize } from "./utils";
+import API from "../api";
+import logger from "../../../logger";
+import { optimalPictureSize } from "../utils";
 import Spinner from "react-native-loading-spinner-overlay";
 
-export default function CapturePhoto({ route, navigation }) {
+export function CapturePhoto({ route, navigation }) {
   const [hasPermission, setHasPermission] = useState(null);
   const type = Camera.Constants.Type.back;
   const [pictureSize, setPictureSize] = useState(null);
