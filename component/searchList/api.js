@@ -1,4 +1,4 @@
-import API from "../api/api";
+import { API } from "../../api";
 
 const customAPI = {
   postBrand: name => {
