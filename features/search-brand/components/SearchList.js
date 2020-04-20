@@ -19,13 +19,15 @@ const SearchList = ({ navigation, route }) => {
     });
   };
 
+  let trimedBrandName = brandName.trim();
+
   return (
     <SafeAreaView style={styles.container}>
       <Searchbar
         placeholder="Search"
         onChangeText={value => {
           setBrandName(value);
-          API.searchBrand(value)
+          API.searchBrand(value.trim())
             .then(result => {
               if (result) {
                 setBrandList(result);
@@ -36,10 +38,10 @@ const SearchList = ({ navigation, route }) => {
         value={brandName}
         testID="search-bar"
       />
-      {brandName !== "" && (
+      {trimedBrandName !== "" && (
         <TouchableOpacity
           onPress={() =>
-            API.postBrand(brandName)
+            API.postBrand(trimedBrandName)
               .then(item => navigateToItemDetails(item))
               .catch(err => {
                 logger(getErrMsg(err));
@@ -48,7 +50,7 @@ const SearchList = ({ navigation, route }) => {
           }
           testID="new-brand"
         >
-          <List.Item title={`Add new brand : "${brandName}"`} />
+          <List.Item title={`Add new brand : "${trimedBrandName}"`} />
           <FlatListItemSeparator />
         </TouchableOpacity>
       )}
