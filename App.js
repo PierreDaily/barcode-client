@@ -3,6 +3,7 @@ import "react-native-gesture-handler";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { BarcodeScan } from "./features/barcode-scan";
+import { HomeScreen } from "./features/home-screen";
 import { ItemDetails } from "./features/item-details";
 import { ItemSaved } from "./features/item-saved";
 import { CapturePhoto } from "./features/capture-photo";
@@ -17,7 +18,8 @@ function App() {
     <PaperProvider>
       <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen name="Home" component={BarcodeScan} />
+          <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="Barcode-scan" component={BarcodeScan} />
           <Stack.Screen name="Search" component={SearchList} />
           <Stack.Screen name="Item-photo" component={CapturePhoto} />
           <Stack.Screen name="Item-details" component={ItemDetails} />
