@@ -6,11 +6,7 @@ const customAPI = {
   },
   searchBrand: name =>
     name !== ""
-      ? API.get(
-          `/brand-search/${name}`,
-          { name: name.toLowerCase() },
-          { "Content-Type": "application/json" }
-        ).then(({ data }) => data)
+      ? API.get(`/brand-search/${name}`).then(({ data }) => data)
       : Promise.resolve([])
 };
 
