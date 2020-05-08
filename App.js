@@ -9,17 +9,24 @@ import { ItemSaved } from "./features/item-saved";
 import { LoadRessources } from "./features/load-ressources";
 import { CapturePhoto } from "./features/capture-photo";
 import { SearchList } from "./features/search-brand";
+import { SignIn } from "./features/sign-in";
 import { AppRegistry } from "react-native";
 import { Provider as PaperProvider } from "react-native-paper";
+import { theme } from "./config";
 
 const Stack = createStackNavigator();
 
 function App() {
   return (
-    <PaperProvider>
+    <PaperProvider theme={theme}>
       <LoadRessources>
         <NavigationContainer>
           <Stack.Navigator>
+            <Stack.Screen
+              name="sign-in"
+              component={SignIn}
+              options={{ headerShown: false }}
+            />
             <Stack.Screen
               name="Home"
               component={HomeScreen}
