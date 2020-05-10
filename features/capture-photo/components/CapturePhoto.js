@@ -36,6 +36,7 @@ export function CapturePhoto({ route, navigation }) {
 
   const takePhoto = async () => {
     try {
+      setIsLoading(true);
       const { uri } = await camera.current.takePictureAsync({
         quality: 0.5
       });
