@@ -4,6 +4,7 @@ import { Text, View, StyleSheet, Vibration } from "react-native";
 import { Button } from "react-native-paper";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import { useIsFocused } from "@react-navigation/native";
+import styles from "../styles";
 
 const BarcodeScan = ({ navigation }) => {
   const [hasPermission, setHasPermission] = useState(null);
@@ -35,13 +36,7 @@ const BarcodeScan = ({ navigation }) => {
   }
 
   return (
-    <View
-      style={{
-        flex: 1,
-        flexDirection: "column",
-        justifyContent: "flex-end"
-      }}
-    >
+    <View style={styles.container}>
       {isFocused && (
         <BarCodeScanner
           barCodeTypes={[
