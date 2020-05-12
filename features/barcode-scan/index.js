@@ -1,1 +1,1 @@
-export * from "./BarcodeScan";
+export * from "./components";
