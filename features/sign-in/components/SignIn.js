@@ -1,5 +1,5 @@
 import React from "react";
-import { View } from "react-native";
+import { Image, View } from "react-native";
 import { Button, TextInput } from "react-native-paper";
 import PropTypes from "prop-types";
 import styles from "../styles";
@@ -40,52 +40,56 @@ const SignIn = ({ navigation }) => {
       .catch(() => alert("email/password is incorrect"));
 
   return (
-    <View style={styles.page}>
-      <Formik
-        initialValues={{
-          email: "",
-          password: ""
-        }}
-        validateOnChange={false}
-        validationSchema={yupSchema}
-        onSubmit={handleSubmit}
-        testID="form"
-      >
-        {({ errors, handleSubmit, setFieldValue, values }) => {
-          return (
-            <View style={styles.container}>
-              <TextInput
-                error={errors.email}
-                label="Email"
-                onChangeText={text => setFieldValue("email", text)}
-                style={styles.textInput}
-                testID="email-input"
-                value={values.email}
-              />
+    // <View style={styles.page}>
+    <Formik
+      initialValues={{
+        email: "",
+        password: ""
+      }}
+      validateOnChange={false}
+      validationSchema={yupSchema}
+      onSubmit={handleSubmit}
+      testID="form"
+    >
+      {({ errors, handleSubmit, setFieldValue, values }) => {
+        return (
+          <View style={styles.container}>
+            <Image
+              style={styles.logo}
+              source={require("../../../assets/img/green-cart.png")}
+            />
+            <TextInput
+              error={errors.email}
+              label="Email"
+              onChangeText={text => setFieldValue("email", text)}
+              style={styles.textInput}
+              testID="email-input"
+              value={values.email}
+            />
 
-              <TextInput
-                error={errors.password}
-                label="Password"
-                onChangeText={text => setFieldValue("password", text)}
-                style={styles.textInput}
-                testID="password-input"
-                value={values.password}
-              />
+            <TextInput
+              error={errors.password}
+              label="Password"
+              onChangeText={text => setFieldValue("password", text)}
+              style={styles.textInput}
+              testID="password-input"
+              value={values.password}
+            />
 
-              <Button
-                labelStyle={{ color: color.white }}
-                mode="contained"
-                style={styles["btn__sign-in"]}
-                onPress={handleSubmit}
-                testID="log-in"
-              >
-                Log in
-              </Button>
-            </View>
-          );
-        }}
-      </Formik>
-    </View>
+            <Button
+              labelStyle={{ color: color.white }}
+              mode="contained"
+              style={styles["btn__sign-in"]}
+              onPress={handleSubmit}
+              testID="log-in"
+            >
+              Log in
+            </Button>
+          </View>
+        );
+      }}
+    </Formik>
+    // </View>
   );
 };
 
