@@ -9,6 +9,11 @@ import {
 import { ItemDetails } from "./ItemDetails";
 import renderer from "react-test-renderer";
 
+jest.mock("../../../assets/img/green-barcode.svg", () => ({
+  __esModule: true,
+  default: "Logo"
+}));
+
 let minProps;
 
 beforeEach(() => {
@@ -76,7 +81,7 @@ test("should navigate to 'Search' screen", async () => {
 
   const { getByTestId } = render(<ItemDetails {...minProps} />);
 
-  await act(async () => fireEvent(getByTestId("search"), "onPress"));
+  await act(async () => fireEvent(getByTestId("search"), "onFocus"));
 
   expect(minProps.navigation.navigate).toHaveBeenCalledWith(
     expectedRoute,
