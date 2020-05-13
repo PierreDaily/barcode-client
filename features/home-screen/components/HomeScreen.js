@@ -1,51 +1,31 @@
 import React from "react";
-import { View } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
+import { Image, View, Text } from "react-native";
 import PropTypes from "prop-types";
-import { FAB, Title } from "react-native-paper";
-import Logo from "../../../assets/img/magnifier-barcode.svg";
+import { FAB } from "react-native-paper";
+import styles from "../styles";
+import { color } from "../../../constants";
 
 const HomeScreen = ({ navigation }) => {
   return (
-    <LinearGradient
-      colors={["rgba(87,228,177,1)", "rgba(84,204,187,1)"]}
-      style={{
-        position: "absolute",
-        left: 0,
-        right: 0,
-        top: 0,
-        height: "100%",
-        display: "flex",
-        justifyContent: "center"
-      }}
-    >
-      <View style={{ display: "flex", alignItems: "center" }}>
-        <Logo width="200" height="200" style={{ marginBottom: 10 }} />
-        <Title
-          style={{
-            color: "#FFFFFF",
-            fontFamily: "Montserrat-Medium",
-            fontSize: 24,
-            padding: "5%",
-            textAlign: "center"
-          }}
-        >
-          Compare groceries prices in Hong Kong
-        </Title>
+    <View style={styles.container}>
+      <View style={styles.content}>
+        <Image
+          style={styles.logo}
+          source={require("../../../assets/img/green-cart.png")}
+        />
+        <Text style={styles.text}>
+          Scan and compare retail prices in Hong Kong
+        </Text>
       </View>
       <View style={{ position: "absolute", bottom: 25, right: 25 }}>
         <FAB
-          color="#FFFFFF"
-          style={{
-            bottom: 0,
-            right: 0,
-            position: "absolute"
-          }}
+          color={color.white}
+          style={styles.fab}
           icon="barcode-scan"
           onPress={() => navigation.navigate("Barcode-scan")}
         />
       </View>
-    </LinearGradient>
+    </View>
   );
 };
 
