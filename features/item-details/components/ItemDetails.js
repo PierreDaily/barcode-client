@@ -4,7 +4,7 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import { View } from "react-native";
 import { TextInput } from "react-native-paper";
-import { ButtonPrimary } from "../../ui/components";
+import { Button } from "../../ui/components";
 import styles from "../styles";
 import Logo from "../../../assets/img/green-barcode.svg";
 
@@ -76,14 +76,14 @@ const ItemDetails = ({ route, navigation }) => {
               testID="search"
             />
           </View>
-          <ButtonPrimary
+          <Button
             mode="contained"
             onPress={handleSubmit}
             style={styles.btn}
             testID="submit"
           >
             Next
-          </ButtonPrimary>
+          </Button>
         </View>
       )}
     </Formik>

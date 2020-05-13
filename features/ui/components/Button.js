@@ -3,17 +3,21 @@ import PropTypes from "prop-types";
 import styles from "../styles";
 import { Button } from "react-native-paper";
 
-const ButtonPrimary = ({ children, style, testID, onPress }) => (
+const ButtonPrimary = ({ children, style, testID, onPress, variant }) => (
   <Button
-    labelStyle={styles.btnPrimaryText}
+    labelStyle={styles[`${variant}Text`]}
     mode="contained"
     onPress={onPress}
-    style={[styles.btnPrimary, style]}
+    style={[styles[variant], style]}
     testID={testID}
   >
     {children}
   </Button>
 );
+
+ButtonPrimary.defaultProps = {
+  variant: "primary"
+};
 
 ButtonPrimary.propTypes = {
   children: PropTypes.oneOfType([
@@ -22,7 +26,8 @@ ButtonPrimary.propTypes = {
   ]).isRequired,
   onPress: PropTypes.func.isRequired,
   style: PropTypes.object,
-  testID: PropTypes.string
+  testID: PropTypes.string,
+  variant: PropTypes.string
 };
 
-export { ButtonPrimary };
+export { ButtonPrimary as Button };

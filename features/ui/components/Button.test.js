@@ -1,5 +1,5 @@
 import React from "react";
-import { ButtonPrimary } from "./ButtonPrimary";
+import { Button } from "./Button";
 
 import renderer from "react-test-renderer";
 
@@ -9,6 +9,6 @@ const minProps = {
 };
 
 test("renders correctly", () => {
-  const tree = renderer.create(<ButtonPrimary {...minProps} />).toJSON();
+  const tree = renderer.create(<Button {...minProps} />).toJSON();
   expect(tree).toMatchSnapshot();
 });

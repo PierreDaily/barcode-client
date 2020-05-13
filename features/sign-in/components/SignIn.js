@@ -1,10 +1,9 @@
 import React from "react";
 import { Image, View } from "react-native";
 import { TextInput } from "react-native-paper";
-import { ButtonPrimary } from "../../ui/components";
+import { Button } from "../../ui/components";
 import PropTypes from "prop-types";
 import styles from "../styles";
-import { color } from "../../../constants";
 import { Formik } from "formik";
 import * as yup from "yup";
 import { customAPI } from "../api";
@@ -77,14 +76,14 @@ const SignIn = ({ navigation }) => {
               value={values.password}
             />
 
-            <ButtonPrimary
+            <Button
               mode="contained"
               style={styles.btnSignIn}
               onPress={handleSubmit}
               testID="log-in"
             >
               Log in
-            </ButtonPrimary>
+            </Button>
           </View>
         );
       }}

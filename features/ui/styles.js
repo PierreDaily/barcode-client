@@ -2,11 +2,11 @@ import { StyleSheet } from "react-native";
 import { color } from "../../constants";
 
 const styles = StyleSheet.create({
-  btnPrimary: {
+  primary: {
     borderRadius: 2,
     width: "100%"
   },
-  btnPrimaryText: {
+  primaryText: {
     color: color.white
   }
 });
