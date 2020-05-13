@@ -24,6 +24,7 @@ beforeEach(() => {
 });
 
 afterEach(() => {
+  jest.clearAllMocks();
   cleanup();
 });
 

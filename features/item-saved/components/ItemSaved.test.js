@@ -6,6 +6,15 @@ import renderer from "react-test-renderer";
 
 let navigationMock;
 
+jest.mock("../../../assets/img/green-check-circle.svg", () => ({
+  __esModule: true,
+  default: "CheckCircle"
+}));
+
+afterEach(() => {
+  jest.clearAllMocks();
+});
+
 beforeEach(() => {
   navigationMock = { navigate: jest.fn() };
 });
