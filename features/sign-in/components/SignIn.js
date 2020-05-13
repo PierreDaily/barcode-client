@@ -1,6 +1,7 @@
 import React from "react";
 import { Image, View } from "react-native";
-import { Button, TextInput } from "react-native-paper";
+import { TextInput } from "react-native-paper";
+import { ButtonPrimary } from "../../ui/components";
 import PropTypes from "prop-types";
 import styles from "../styles";
 import { color } from "../../../constants";
@@ -76,15 +77,14 @@ const SignIn = ({ navigation }) => {
               value={values.password}
             />
 
-            <Button
-              labelStyle={{ color: color.white }}
+            <ButtonPrimary
               mode="contained"
-              style={styles["btn__sign-in"]}
+              style={styles.btnSignIn}
               onPress={handleSubmit}
               testID="log-in"
             >
               Log in
-            </Button>
+            </ButtonPrimary>
           </View>
         );
       }}
