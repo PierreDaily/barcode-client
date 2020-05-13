@@ -1,14 +1,8 @@
 import { StyleSheet } from "react-native";
-import { color } from "../../constants";
 
 const styles = StyleSheet.create({
   btn: {
-    borderRadius: 25,
-    marginBottom: 46,
-    width: "100%"
-  },
-  btnText: {
-    color: color.white
+    marginBottom: 46
   },
   container: {
     flex: 1,

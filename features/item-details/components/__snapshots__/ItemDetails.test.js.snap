@@ -362,7 +362,7 @@ exports[`renders correctly 1`] = `
       Object {
         "backgroundColor": "#6200ee",
         "borderColor": "transparent",
-        "borderRadius": 25,
+        "borderRadius": 2,
         "borderStyle": "solid",
         "borderWidth": 0,
         "elevation": 2,
@@ -399,7 +399,7 @@ exports[`renders correctly 1`] = `
             "overflow": "hidden",
           },
           Object {
-            "borderRadius": 25,
+            "borderRadius": 2,
           },
         ]
       }
