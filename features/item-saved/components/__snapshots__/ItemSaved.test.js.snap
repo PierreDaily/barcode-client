@@ -1,20 +1,70 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
-<View>
-  <Text>
-    Thank you for your help, your item has been submited
-  </Text>
+<View
+  style={
+    Object {
+      "flex": 1,
+      "paddingLeft": 40,
+      "paddingRight": 40,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "display": "flex",
+        "height": 260,
+        "top": 133,
+      }
+    }
+  >
+    <CheckCircle
+      style={
+        Object {
+          "marginBottom": 60,
+        }
+      }
+    />
+    <Text
+      style={
+        Object {
+          "color": "#54CCBB",
+          "fontFamily": "Montserrat-Medium",
+          "fontSize": 18,
+          "textAlign": "center",
+        }
+      }
+    >
+      Your item has been submited.
+    </Text>
+    <Text
+      style={
+        Object {
+          "color": "#54CCBB",
+          "fontFamily": "Montserrat-Medium",
+          "fontSize": 18,
+          "textAlign": "center",
+        }
+      }
+    >
+      Thank you for your help.
+    </Text>
+  </View>
   <View
     style={
       Object {
         "backgroundColor": "#6200ee",
         "borderColor": "transparent",
-        "borderRadius": 4,
+        "borderRadius": 2,
         "borderStyle": "solid",
         "borderWidth": 0,
+        "bottom": 46,
         "elevation": 2,
+        "marginLeft": 40,
         "minWidth": 64,
+        "position": "absolute",
         "shadowColor": "#000000",
         "shadowOffset": Object {
           "height": 0.75,
@@ -22,6 +72,7 @@ exports[`renders correctly 1`] = `
         },
         "shadowOpacity": 0.24,
         "shadowRadius": 1.5,
+        "width": "100%",
       }
     }
   >
@@ -44,7 +95,7 @@ exports[`renders correctly 1`] = `
             "overflow": "hidden",
           },
           Object {
-            "borderRadius": 4,
+            "borderRadius": 2,
           },
         ]
       }
@@ -91,7 +142,9 @@ exports[`renders correctly 1`] = `
                   "fontFamily": "System",
                   "fontWeight": "500",
                 },
-                undefined,
+                Object {
+                  "color": "#F8F8F8",
+                },
               ],
             ]
           }
