@@ -1,9 +1,9 @@
 import React from "react";
 import { Image, View } from "react-native";
-import { Button, TextInput } from "react-native-paper";
+import { TextInput } from "react-native-paper";
+import { Button } from "../../ui/components";
 import PropTypes from "prop-types";
 import styles from "../styles";
-import { color } from "../../../constants";
 import { Formik } from "formik";
 import * as yup from "yup";
 import { customAPI } from "../api";
@@ -77,9 +77,8 @@ const SignIn = ({ navigation }) => {
             />
 
             <Button
-              labelStyle={{ color: color.white }}
               mode="contained"
-              style={styles["btn__sign-in"]}
+              style={styles.btnSignIn}
               onPress={handleSubmit}
               testID="log-in"
             >

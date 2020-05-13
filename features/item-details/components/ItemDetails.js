@@ -3,7 +3,8 @@ import PropTypes from "prop-types";
 import { Formik } from "formik";
 import * as yup from "yup";
 import { View } from "react-native";
-import { Button, TextInput } from "react-native-paper";
+import { TextInput } from "react-native-paper";
+import { Button } from "../../ui/components";
 import styles from "../styles";
 import Logo from "../../../assets/img/green-barcode.svg";
 
@@ -19,7 +20,6 @@ const ItemDetails = ({ route, navigation }) => {
   } = route;
 
   return (
-    //  <View style={{ flex: 1 }}>
     <Formik
       initialValues={{
         name: ""
@@ -77,7 +77,6 @@ const ItemDetails = ({ route, navigation }) => {
             />
           </View>
           <Button
-            labelStyle={styles.btnText}
             mode="contained"
             onPress={handleSubmit}
             style={styles.btn}
@@ -88,7 +87,6 @@ const ItemDetails = ({ route, navigation }) => {
         </View>
       )}
     </Formik>
-    // </View>
   );
 };
 

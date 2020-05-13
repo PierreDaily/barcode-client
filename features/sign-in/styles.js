@@ -1,8 +1,7 @@
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
-  "btn__sign-in": {
-    borderRadius: 25,
+  btnSignIn: {
     marginTop: 60
   },
   container: {
