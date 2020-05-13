@@ -3,7 +3,7 @@ const color = {
   pageBackground: "#EEEEEE",
   primary: "#54CCBB",
   separator: "#607D8B",
-  white: "#FFFFFF"
+  white: "#F8F8F8"
 };
 
 export { color };
