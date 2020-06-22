@@ -2,9 +2,11 @@ import axios from "axios";
 import { Tokens } from "./class";
 
 const serverAddress =
-  process.env["NODE_ENV"] === "development" ? "192.168.0.183" : "5.135.186.3";
-const serverPort = 3000;
-const sheme = "http";
+  process.env["SERVER_ADDRESS"] === "development"
+    ? "192.168.0.183"
+    : "pierredaily.com";
+const serverPort = process.env["NODE_ENV"] === "development" ? 3001 : 3000;
+const sheme = process.env["NODE_ENV"] === "development" ? "http" : "https";
 const serverURL = `${sheme}://${serverAddress}:${serverPort}`;
 const auth = new Tokens();
 
