@@ -5,6 +5,7 @@ exports[`renders correctly 1`] = `
   emulateUnlessSupported={true}
   style={
     Object {
+      "flex": 1,
       "padding": "4%",
     }
   }

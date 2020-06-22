@@ -3,6 +3,7 @@ import { color } from "../../constants";
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     padding: "4%"
   },
   separator: {
