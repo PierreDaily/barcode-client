@@ -71,8 +71,10 @@ const SignIn = ({ navigation }) => {
               error={errors.password}
               label="Password"
               onChangeText={text => setFieldValue("password", text)}
+              secureTextEntry={true}
               style={styles.textInput}
               testID="password-input"
+              textContentType="password"
               value={values.password}
             />
 
