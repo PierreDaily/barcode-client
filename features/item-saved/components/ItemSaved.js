@@ -20,10 +20,15 @@ const ItemSaved = ({ navigation }) => {
         onPress={() => {
           navigation.navigate("Add-price");
         }}
+        testID="yesBtn"
       >
         Yes
       </Button>
-      <Button style={styles.btn} onPress={() => navigation.navigate("Home")}>
+      <Button
+        style={styles.btn}
+        onPress={() => navigation.navigate("Home")}
+        testID="noBtn"
+      >
         No
       </Button>
     </View>

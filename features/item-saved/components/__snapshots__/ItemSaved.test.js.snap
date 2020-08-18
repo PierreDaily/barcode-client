@@ -49,7 +49,7 @@ exports[`renders correctly 1`] = `
         }
       }
     >
-      Thank you for your help.
+      Would you like to help the community and input the price ?
     </Text>
   </View>
   <View
@@ -60,7 +60,7 @@ exports[`renders correctly 1`] = `
         "borderRadius": 2,
         "borderStyle": "solid",
         "borderWidth": 0,
-        "bottom": 46,
+        "bottom": 92,
         "elevation": 2,
         "marginLeft": 40,
         "minWidth": 64,
@@ -75,6 +75,7 @@ exports[`renders correctly 1`] = `
         "width": "100%",
       }
     }
+    testID="yesBtn"
   >
     <View
       accessibilityRole="button"
@@ -149,7 +150,110 @@ exports[`renders correctly 1`] = `
             ]
           }
         >
-          Home
+          Yes
+        </Text>
+      </View>
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "backgroundColor": "#6200ee",
+        "borderColor": "transparent",
+        "borderRadius": 2,
+        "borderStyle": "solid",
+        "borderWidth": 0,
+        "bottom": 46,
+        "elevation": 2,
+        "marginLeft": 40,
+        "minWidth": 64,
+        "position": "absolute",
+        "shadowColor": "#000000",
+        "shadowOffset": Object {
+          "height": 0.75,
+          "width": 0,
+        },
+        "shadowOpacity": 0.24,
+        "shadowRadius": 1.5,
+        "width": "100%",
+      }
+    }
+    testID="noBtn"
+  >
+    <View
+      accessibilityRole="button"
+      accessibilityStates={Array []}
+      accessible={true}
+      focusable={true}
+      isTVSelectable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "overflow": "hidden",
+          },
+          Object {
+            "borderRadius": 2,
+          },
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "justifyContent": "center",
+            },
+            undefined,
+          ]
+        }
+      >
+        <Text
+          numberOfLines={1}
+          style={
+            Array [
+              Object {
+                "color": "#000000",
+                "fontFamily": "System",
+                "fontWeight": "400",
+                "textAlign": "left",
+              },
+              Array [
+                Object {
+                  "letterSpacing": 1,
+                  "marginHorizontal": 16,
+                  "marginVertical": 9,
+                  "textAlign": "center",
+                },
+                undefined,
+                Object {
+                  "textTransform": "uppercase",
+                },
+                Object {
+                  "color": "#ffffff",
+                  "fontFamily": "System",
+                  "fontWeight": "500",
+                },
+                Object {
+                  "fontFamily": "System",
+                  "fontWeight": "500",
+                },
+                Object {
+                  "color": "#F8F8F8",
+                },
+              ],
+            ]
+          }
+        >
+          No
         </Text>
       </View>
     </View>
