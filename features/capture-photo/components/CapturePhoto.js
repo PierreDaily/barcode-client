@@ -7,6 +7,8 @@ import API from "../api";
 import logger from "../../../logger";
 import { optimalPictureSize } from "../utils";
 import Spinner from "react-native-loading-spinner-overlay";
+import { addPriceState } from "../../../atoms";
+import { useSetRecoilState } from "recoil";
 
 export function CapturePhoto({ route, navigation }) {
   const [hasPermission, setHasPermission] = useState(null);
@@ -14,6 +16,7 @@ export function CapturePhoto({ route, navigation }) {
   const [pictureSize, setPictureSize] = useState(null);
   const [cameraRdy, setCameraStatus] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const setPriceInfo = useSetRecoilState(addPriceState);
   let isFocused = useIsFocused();
   const camera = useRef(null);
 
@@ -41,9 +44,16 @@ export function CapturePhoto({ route, navigation }) {
         quality: 0.5
       });
 
-      await API.postItem({ barcode, barcodeType, brand, name, imgUri: uri });
+      const { id: itemId } = await API.postItem({
+        barcode,
+        barcodeType,
+        brand,
+        name,
+        imgUri: uri
+      });
 
       setIsLoading(false);
+      setPriceInfo(priceInfo => ({ ...priceInfo, itemId }));
       navigation.navigate("Item-saved");
     } catch (err) {
       setIsLoading(false);
