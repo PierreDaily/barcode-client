@@ -15,7 +15,7 @@ const customAPI = {
 
     return API.post(`/item`, data, {
       "content-type": `multipart/form-data`
-    });
+    }).then(({ data }) => data);
   }
 };
 
