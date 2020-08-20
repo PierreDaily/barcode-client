@@ -47,7 +47,9 @@ const HowMuch = ({ navigation }) => {
       {({ errors, handleSubmit, setFieldValue, values }) => (
         <View style={styles.container}>
           <Text style={styles.text}>
-            How much is it ? {priceInfo.totalPrice}
+            {discountIndex > 1
+              ? `How much is the total price for those ${discountIndex} items ?`
+              : "How much is it ? "}
           </Text>
           <TextInput
             error={errors.price}
