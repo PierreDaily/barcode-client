@@ -1,46 +1,21 @@
 import React from "react";
 import "react-native-gesture-handler";
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
-import { BarcodeScan } from "./features/barcode-scan";
-import { HomeScreen } from "./features/home-screen";
-import { ItemDetails } from "./features/item-details";
-import { ItemSaved } from "./features/item-saved";
 import { LoadRessources } from "./features/load-ressources";
-import { CapturePhoto } from "./features/capture-photo";
-import { SearchList } from "./features/search-brand";
-import { SignIn } from "./features/sign-in";
 import { AppRegistry } from "react-native";
 import { Provider as PaperProvider } from "react-native-paper";
 import { theme } from "./config";
-
-const Stack = createStackNavigator();
+import { NavigationRoot } from "./navigation";
+import { RecoilRoot } from "recoil";
 
 function App() {
   return (
-    <PaperProvider theme={theme}>
-      <LoadRessources>
-        <NavigationContainer>
-          <Stack.Navigator>
-            <Stack.Screen
-              name="sign-in"
-              component={SignIn}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="Home"
-              component={HomeScreen}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen name="Barcode-scan" component={BarcodeScan} />
-            <Stack.Screen name="Search" component={SearchList} />
-            <Stack.Screen name="Item-photo" component={CapturePhoto} />
-            <Stack.Screen name="Item-details" component={ItemDetails} />
-            <Stack.Screen name="Item-saved" component={ItemSaved} />
-          </Stack.Navigator>
-        </NavigationContainer>
-      </LoadRessources>
-    </PaperProvider>
+    <RecoilRoot>
+      <PaperProvider theme={theme}>
+        <LoadRessources>
+          <NavigationRoot />
+        </LoadRessources>
+      </PaperProvider>
+    </RecoilRoot>
   );
 }
 
