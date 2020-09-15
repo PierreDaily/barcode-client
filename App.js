@@ -6,6 +6,7 @@ import { Provider as PaperProvider } from "react-native-paper";
 import { theme } from "./config";
 import { NavigationRoot } from "./navigation";
 import { RecoilRoot } from "recoil";
+import StorybookUIRoot from "./storybook";
 
 function App() {
   return (
@@ -21,4 +22,16 @@ function App() {
 
 AppRegistry.registerComponent("app", () => App);
 
-export default App;
+function Storybook() {
+  return (
+    <PaperProvider theme={theme}>
+      <LoadRessources>
+        <StorybookUIRoot />
+      </LoadRessources>
+    </PaperProvider>
+  );
+}
+
+export default process.env && process.env.EXPO_RUN_STORYBOOK === "TRUE"
+  ? Storybook
+  : App;
