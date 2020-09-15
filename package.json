@@ -6,7 +6,20 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "test": "jest"
+    "test": "jest",
+    "storybook": "start-storybook -p 6006",
+    "storybook-client": "EXPO_RUN_STORYBOOK=TRUE expo start",
+    "build-storybook": "build-storybook",
+    "prestorybook": "rnstl"
+  },
+  "config": {
+    "react-native-storybook-loader": {
+      "searchDir": [
+        "./features"
+      ],
+      "pattern": "**/*.stories.js",
+      "outputFile": "./storybook/storyLoader.js"
+    }
   },
   "dependencies": {
     "@react-native-community/masked-view": "0.1.5",
@@ -36,6 +49,13 @@
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
+    "@storybook/addon-actions": "^6.0.21",
+    "@storybook/addon-essentials": "^6.0.21",
+    "@storybook/addon-links": "^6.0.21",
+    "@storybook/addon-ondevice-actions": "^5.3.21",
+    "@storybook/react-native": "^5.3.21",
+    "@storybook/react-native-server": "^5.3.21",
+    "babel-loader": "^8.1.0",
     "babel-preset-expo": "~8.0.0",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.10.0",
@@ -45,6 +65,8 @@
     "jest": "^25.1.0",
     "jest-expo": "^36.0.1",
     "prettier": "1.19.1",
+    "react-is": "^16.13.1",
+    "react-native-storybook-loader": "^2.0.2",
     "react-native-testing-library": "^1.13.0",
     "react-test-renderer": "^16.13.1"
   },
