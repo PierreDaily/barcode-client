@@ -362,10 +362,11 @@ exports[`renders correctly 1`] = `
       Object {
         "backgroundColor": "#6200ee",
         "borderColor": "transparent",
-        "borderRadius": 2,
+        "borderRadius": 10,
         "borderStyle": "solid",
         "borderWidth": 0,
         "elevation": 2,
+        "height": 40,
         "marginBottom": 46,
         "minWidth": 64,
         "shadowColor": "#000000",
@@ -375,7 +376,6 @@ exports[`renders correctly 1`] = `
         },
         "shadowOpacity": 0.24,
         "shadowRadius": 1.5,
-        "width": "100%",
       }
     }
     testID="submit"
@@ -399,7 +399,7 @@ exports[`renders correctly 1`] = `
             "overflow": "hidden",
           },
           Object {
-            "borderRadius": 2,
+            "borderRadius": 10,
           },
         ]
       }

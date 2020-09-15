@@ -3,8 +3,8 @@ import { color } from "../../constants";
 
 const styles = StyleSheet.create({
   primary: {
-    borderRadius: 2,
-    width: "100%"
+    borderRadius: 10,
+    height: 40
   },
   primaryText: {
     color: color.white
