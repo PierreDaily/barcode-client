@@ -30,7 +30,7 @@ exports[`renders correctly 1`] = `
     <Text
       style={
         Object {
-          "color": "#54CCBB",
+          "color": "#4E66A9",
           "fontFamily": "Montserrat-Medium",
           "fontSize": 18,
           "textAlign": "center",
@@ -42,7 +42,7 @@ exports[`renders correctly 1`] = `
     <Text
       style={
         Object {
-          "color": "#54CCBB",
+          "color": "#4E66A9",
           "fontFamily": "Montserrat-Medium",
           "fontSize": 18,
           "textAlign": "center",
@@ -57,11 +57,12 @@ exports[`renders correctly 1`] = `
       Object {
         "backgroundColor": "#6200ee",
         "borderColor": "transparent",
-        "borderRadius": 2,
+        "borderRadius": 10,
         "borderStyle": "solid",
         "borderWidth": 0,
         "bottom": 92,
         "elevation": 2,
+        "height": 40,
         "marginLeft": 40,
         "minWidth": 64,
         "position": "absolute",
@@ -72,7 +73,6 @@ exports[`renders correctly 1`] = `
         },
         "shadowOpacity": 0.24,
         "shadowRadius": 1.5,
-        "width": "100%",
       }
     }
     testID="yesBtn"
@@ -96,7 +96,7 @@ exports[`renders correctly 1`] = `
             "overflow": "hidden",
           },
           Object {
-            "borderRadius": 2,
+            "borderRadius": 10,
           },
         ]
       }
@@ -160,11 +160,12 @@ exports[`renders correctly 1`] = `
       Object {
         "backgroundColor": "#6200ee",
         "borderColor": "transparent",
-        "borderRadius": 2,
+        "borderRadius": 10,
         "borderStyle": "solid",
         "borderWidth": 0,
         "bottom": 46,
         "elevation": 2,
+        "height": 40,
         "marginLeft": 40,
         "minWidth": 64,
         "position": "absolute",
@@ -175,7 +176,6 @@ exports[`renders correctly 1`] = `
         },
         "shadowOpacity": 0.24,
         "shadowRadius": 1.5,
-        "width": "100%",
       }
     }
     testID="noBtn"
@@ -199,7 +199,7 @@ exports[`renders correctly 1`] = `
             "overflow": "hidden",
           },
           Object {
-            "borderRadius": 2,
+            "borderRadius": 10,
           },
         ]
       }
