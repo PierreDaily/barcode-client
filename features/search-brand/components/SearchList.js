@@ -24,6 +24,7 @@ const SearchList = ({ navigation, route }) => {
   return (
     <SafeAreaView style={styles.container}>
       <Searchbar
+        autoFocus
         placeholder="Search"
         onChangeText={value => {
           setBrandName(value);
