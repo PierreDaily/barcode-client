@@ -6,6 +6,7 @@ const theme = {
   roundness: 2,
   colors: {
     ...DefaultTheme.colors,
+    accent: color.primary,
     primary: color.primary
   }
 };
