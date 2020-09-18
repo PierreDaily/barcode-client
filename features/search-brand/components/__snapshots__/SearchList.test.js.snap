@@ -82,6 +82,7 @@ exports[`renders correctly 1`] = `
       accessibilityRole="search"
       accessibilityTraits="search"
       allowFontScaling={true}
+      autoFocus={true}
       keyboardAppearance="light"
       onChangeText={[Function]}
       placeholder="Search"
