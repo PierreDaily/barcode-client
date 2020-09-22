@@ -5,6 +5,7 @@ import { Button } from "react-native-paper";
 
 const ButtonPrimary = ({ children, style, testID, onPress, variant }) => (
   <Button
+    contentStyle={styles[`${variant}`]}
     labelStyle={styles[`${variant}Text`]}
     mode="contained"
     onPress={onPress}
