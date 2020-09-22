@@ -109,7 +109,10 @@ exports[`renders correctly 1`] = `
               "flexDirection": "row",
               "justifyContent": "center",
             },
-            undefined,
+            Object {
+              "borderRadius": 10,
+              "height": 40,
+            },
           ]
         }
       >
@@ -212,7 +215,10 @@ exports[`renders correctly 1`] = `
               "flexDirection": "row",
               "justifyContent": "center",
             },
-            undefined,
+            Object {
+              "borderRadius": 10,
+              "height": 40,
+            },
           ]
         }
       >
